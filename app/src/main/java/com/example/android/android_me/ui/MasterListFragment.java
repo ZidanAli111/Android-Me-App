@@ -1,10 +1,12 @@
 package com.example.android.android_me.ui;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.example.android.android_me.R;
@@ -12,8 +14,23 @@ import com.example.android.android_me.data.AndroidImageAssets;
 
 public class MasterListFragment extends Fragment {
 
+    OnImageClickListener onImageClickListener;
+
     // Mandatory empty constructor
     public MasterListFragment() {
+    }
+
+    @Override
+    public void onAttach(Context context) {
+
+        super.onAttach(context);
+
+        try {
+            onImageClickListener = (OnImageClickListener) context;
+
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + "must implement OnImageClickListener");
+        }
     }
 
     // Inflates the GridView of all AndroidMe images
@@ -33,8 +50,19 @@ public class MasterListFragment extends Fragment {
         // Set the adapter on the GridView
         gridView.setAdapter(mAdapter);
 
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                onImageClickListener.onImageSelected(position);
+            }
+        });
         // Return the root view
         return rootView;
+    }
+
+    public interface OnImageClickListener {
+        void onImageSelected(int position);
     }
 
 

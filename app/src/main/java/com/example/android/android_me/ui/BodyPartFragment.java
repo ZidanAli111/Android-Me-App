@@ -24,13 +24,6 @@ public class BodyPartFragment extends Fragment {
     private List<Integer> mImageIds;
     private int mListIndex;
 
-    public void setmImageIds(List<Integer> mImageIds) {
-        this.mImageIds = mImageIds;
-    }
-
-    public void setmListIndex(int mListIndex) {
-        this.mListIndex = mListIndex;
-    }
 
     public BodyPartFragment() {
     }
@@ -72,6 +65,15 @@ public class BodyPartFragment extends Fragment {
         }
         return  rootView;
     }
+
+    public void setmImageIds(List<Integer> mImageIds) {
+        this.mImageIds = mImageIds;
+    }
+
+    public void setmListIndex(int mListIndex) {
+        this.mListIndex = mListIndex;
+    }
+
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle currentState) {
